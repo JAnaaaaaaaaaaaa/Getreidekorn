@@ -1,0 +1,169 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Getreidekorn – Mehlsorten</title>
+<style>
+*{box-sizing:border-box}body{margin:0;background:#f7e8ad;color:#30302d;font-family:Arial,sans-serif}
+.wrap{max-width:1180px;margin:auto;padding:22px}h1{text-align:center;margin:4px 0 6px;font-size:34px}
+.sub{text-align:center;font-size:18px;margin:0 0 20px}.grid{display:grid;grid-template-columns:330px 1fr 300px;gap:18px}
+.card{background:#fffdf7;border:2px solid #d5bd72;border-radius:20px;padding:17px;box-shadow:0 5px 15px #0002}
+h2{font-size:21px;margin:0 0 12px}.instruction{line-height:1.45;margin-bottom:12px}
+.part{background:white;border:2px solid #80602c;border-radius:13px;padding:11px;margin:9px 0;font-size:17px;font-weight:bold;cursor:grab;box-shadow:0 3px 7px #0002}.labelTerm{background:white;border:2px solid #80602c;border-radius:13px;padding:10px;margin:8px 0;text-align:center;font-size:17px;font-weight:bold;cursor:grab;box-shadow:0 3px 7px #0002}.labelTerm.used{opacity:.45;cursor:default}.labelDrop{cursor:pointer}
+.part small{display:block;font-size:12px;font-weight:normal;margin-top:4px}.part.used{opacity:.35}
+.mill{text-align:center}.mill svg{width:100%;height:480px}.drop{cursor:pointer}.over rect{fill:#e7f2dc!important;stroke:#5b8d45!important}
+#msg{min-height:30px;font-size:18px;font-weight:bold;margin:4px 0 10px}
+button{width:100%;border:0;border-radius:12px;padding:12px;background:#d8bd6e;font-size:16px;font-weight:bold;cursor:pointer}
+button:disabled{opacity:.6}.result{display:none;margin-top:12px;padding:14px;border-radius:14px;background:#edf5e5;border:2px solid #7da55c;text-align:center}
+.result .name{font-size:26px;font-weight:bold;margin:6px}.info{margin-top:14px;padding:12px;background:#fff8dc;border-radius:13px;line-height:1.45;font-size:14px}
+@keyframes spin{to{transform:rotate(360deg)}}.spinning{animation:spin 1.1s linear infinite;transform-origin:center}
+@media(max-width:980px){.grid{grid-template-columns:1fr 1fr}.millcard{grid-column:1/-1}}
+@media(max-width:650px){.grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div class="wrap">
+<h1>🌾 Vom Getreidekorn zur Mehlsorte</h1>
+<p class="sub">Ziehe die Teile des Korns in die Mühle und finde heraus, welches Mehl entsteht.</p>
+<div class="grid">
+
+<div class="card">
+<h2>1. Korn beschriften</h2>
+<p class="instruction">Ziehe die Begriffe an die richtige Stelle des Getreidekorns.</p>
+
+<div id="labelArea" style="background:#f7e8ad;border-radius:14px;padding:8px;margin-bottom:12px">
+<svg viewBox="0 0 330 300" style="width:100%;height:300px">
+  <defs>
+    <linearGradient id="grainOuter" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#b77b28"/><stop offset="1" stop-color="#d6a044"/>
+    </linearGradient>
+    <clipPath id="grainClip2">
+      <path d="M137 25 C195 12 245 48 259 105 C273 161 267 230 234 270 C209 301 160 304 125 280 C93 258 80 211 79 161 C78 105 96 47 137 25Z"/>
+    </clipPath>
+  </defs>
+  <path d="M137 25 C195 12 245 48 259 105 C273 161 267 230 234 270 C209 301 160 304 125 280 C93 258 80 211 79 161 C78 105 96 47 137 25Z"
+        fill="url(#grainOuter)" stroke="#65451f" stroke-width="5"/>
+  <g clip-path="url(#grainClip2)">
+    <path d="M139 38 C190 27 231 60 244 108 C256 158 251 220 224 254 C203 280 165 286 137 266 C109 247 96 207 96 162 C95 111 110 57 139 38Z"
+          fill="#f0d79b" stroke="#b77b28" stroke-width="4"/>
+    <path d="M141 55 C181 45 215 71 226 111 C236 153 232 207 210 237 C193 259 164 263 142 248 C120 233 110 198 110 160 C110 120 119 68 141 55Z"
+          fill="#fff2ce" stroke="#d6b36b" stroke-width="3"/>
+    <path d="M116 215 C106 196 109 173 122 158 C135 144 153 149 160 165 C168 183 163 208 149 224 C136 238 122 232 116 215Z"
+          fill="#c99843" stroke="#91662b" stroke-width="3"/>
+  </g>
+
+  <!-- empty drop targets -->
+  <g class="labelDrop" data-label="Schale">
+    <rect x="10" y="65" width="105" height="42" rx="10" fill="white" stroke="#72542d" stroke-width="2" stroke-dasharray="6 5"/>
+    <path d="M115 86 L101 102" stroke="#72542d" stroke-width="2"/>
+  </g>
+  <g class="labelDrop" data-label="Mehlkörper">
+    <rect x="215" y="115" width="105" height="42" rx="10" fill="white" stroke="#72542d" stroke-width="2" stroke-dasharray="6 5"/>
+    <path d="M215 136 L195 143" stroke="#72542d" stroke-width="2"/>
+  </g>
+  <g class="labelDrop" data-label="Keimling">
+    <rect x="10" y="235" width="105" height="42" rx="10" fill="white" stroke="#72542d" stroke-width="2" stroke-dasharray="6 5"/>
+    <path d="M115 255 L127 220" stroke="#72542d" stroke-width="2"/>
+  </g>
+</svg>
+</div>
+
+<div class="labelTerm" draggable="true" data-label-answer="Schale">Schale</div>
+<div class="labelTerm" draggable="true" data-label-answer="Mehlkörper">Mehlkörper</div>
+<div class="labelTerm" draggable="true" data-label-answer="Keimling">Keimling</div>
+<div id="labelMsg" style="min-height:28px;text-align:center;font-weight:bold;margin:7px 0"></div>
+
+<hr style="border:0;border-top:1px solid #ddd;margin:16px 0">
+
+<h2>2. Teile in die Mühle geben</h2>
+<p class="instruction">Ziehe danach die gewünschten Bestandteile in den Trichter der Mühle.</p>
+<div class="part" draggable="true" data-part="outer">🟤 Äussere Fruchtschale<small>Schützt das Korn; Nahrungsfasern, Mineralstoffe, Vitamine, Eiweiss.</small></div>
+<div class="part" draggable="true" data-part="inner">🟠 Innere Fruchtschale<small>Gehört zu den äusseren Schichten des Korns.</small></div>
+<div class="part" draggable="true" data-part="germ">🌱 Keimling<small>Für die Fortpflanzung; Mineralstoffe, Vitamine, Eiweiss und Fett.</small></div>
+<div class="part" draggable="true" data-part="endosperm">⚪ Mehlkörper<small>Speichermedium; Eiweiss und Stärke (Kohlenhydrate).</small></div>
+</div>
+
+<div class="card millcard mill">
+<h2>3. Die Mühle</h2>
+<svg viewBox="0 0 500 520">
+<path d="M120 105L250 35l130 70z" fill="#a86d34" stroke="#68451f" stroke-width="5"/>
+<rect x="145" y="105" width="210" height="300" rx="12" fill="#ead39a" stroke="#68451f" stroke-width="5"/>
+<rect x="175" y="150" width="65" height="80" rx="8" fill="#d5c17e" stroke="#68451f" stroke-width="4"/>
+<rect x="260" y="150" width="65" height="80" rx="8" fill="#d5c17e" stroke="#68451f" stroke-width="4"/>
+<rect x="205" y="310" width="90" height="95" rx="8" fill="#b77d40" stroke="#68451f" stroke-width="5"/>
+<g id="hopper" class="drop">
+<path d="M185 108h130l-23 82h-84z" fill="#d7b86b" stroke="#68451f" stroke-width="5"/>
+<rect x="208" y="82" width="84" height="32" rx="7" fill="#f7edc9" stroke="#68451f" stroke-width="4"/>
+</g>
+<g id="wheel"><circle cx="110" cy="320" r="55" fill="#c48d49" stroke="#68451f" stroke-width="6"/>
+<circle cx="110" cy="320" r="10" fill="#f7e6b3" stroke="#68451f" stroke-width="4"/>
+<path d="M110 270V370M60 320h100M75 285l70 70M145 285l-70 70" stroke="#68451f" stroke-width="6"/></g>
+<path d="M330 405q20-20 40 0l5 60q-25 20-50 0z" fill="#f7f0d9" stroke="#68451f" stroke-width="4"/>
+<text x="350" y="438" text-anchor="middle" font-size="16" font-weight="bold" fill="#68451f">MEHL</text>
+</svg>
+<div id="msg">Ziehe Teile in den Trichter.</div>
+<button id="millBtn">⚙️ Mahlen</button>
+</div>
+
+<div class="card">
+<h2>4. Ergebnis</h2>
+<p class="instruction">Die Mehlsorte hängt davon ab, welche Teile des Korns enthalten sind.</p>
+<div id="result" class="result"><div>Es entsteht:</div><div class="name" id="name"></div><div id="desc"></div></div>
+<div class="info"><b>Merke:</b><br>
+🌾 Vollkornmehl = alle drei Hauptbestandteile<br>
+🟤 Ruchmehl = Mehlkörper + Teile der äusseren Schichten<br>
+🟠 Halbweissmehl = nahezu schalenfrei<br>
+⚪ Weissmehl = nur Mehlkörper
+</div>
+<button id="reset" style="margin-top:14px">↻ Alles neu starten</button>
+</div>
+</div></div>
+<script>
+const labelTerms=[...document.querySelectorAll('.labelTerm')],labelDrops=[...document.querySelectorAll('.labelDrop')],labelMsg=document.getElementById('labelMsg');
+labelTerms.forEach(t=>t.addEventListener('dragstart',e=>{if(!t.classList.contains('used'))e.dataTransfer.setData('label',t.dataset.labelAnswer)}));
+labelDrops.forEach(d=>{
+ d.addEventListener('dragover',e=>e.preventDefault());
+ d.addEventListener('drop',e=>{
+   e.preventDefault();
+   const answer=e.dataTransfer.getData('label');
+   if(!answer)return;
+   if(answer===d.dataset.label){
+     const t=labelTerms.find(x=>x.dataset.labelAnswer===answer);
+     t.classList.add('used'); t.setAttribute('draggable','false');
+     d.querySelector('rect').setAttribute('fill','#eaf5df');
+     d.querySelector('rect').setAttribute('stroke','#5b8d45');
+     d.querySelector('rect').setAttribute('stroke-dasharray','0');
+     d.querySelector('rect').nextElementSibling?.setAttribute('stroke','#5b8d45');
+     const r=d.querySelector('rect'), tx=r.parentElement.querySelector('text');
+     if(!tx){
+       const svg=d.closest('svg');
+       const text=document.createElementNS('http://www.w3.org/2000/svg','text');
+       text.setAttribute('x',parseFloat(r.getAttribute('x'))+parseFloat(r.getAttribute('width'))/2);
+       text.setAttribute('y',parseFloat(r.getAttribute('y'))+27);
+       text.setAttribute('text-anchor','middle'); text.setAttribute('font-size','15'); text.setAttribute('font-weight','bold'); text.setAttribute('fill','#3d5f31');
+       text.textContent='✓ '+answer; d.appendChild(text);
+     }
+     labelMsg.textContent='Richtig! ✓'; labelMsg.style.color='#4d7d3d';
+     if(labelTerms.every(x=>x.classList.contains('used'))) labelMsg.textContent='Super! Das Korn ist richtig beschriftet. 🌟';
+   } else { labelMsg.textContent='Noch nicht richtig – versuche es noch einmal.'; labelMsg.style.color='#9a5b35';}
+ });
+});
+const parts=[...document.querySelectorAll('.part')],hopper=document.getElementById('hopper'),wheel=document.getElementById('wheel');
+const selected=new Set(),msg=document.getElementById('msg'),result=document.getElementById('result'),name=document.getElementById('name'),desc=document.getElementById('desc'),btn=document.getElementById('millBtn');
+parts.forEach(p=>p.addEventListener('dragstart',e=>{if(!p.classList.contains('used'))e.dataTransfer.setData('text/plain',p.dataset.part)}));
+hopper.addEventListener('dragover',e=>{e.preventDefault();hopper.classList.add('over')});
+hopper.addEventListener('dragleave',()=>hopper.classList.remove('over'));
+hopper.addEventListener('drop',e=>{e.preventDefault();hopper.classList.remove('over');let x=e.dataTransfer.getData('text/plain');if(!x||selected.has(x))return;selected.add(x);parts.find(p=>p.dataset.part===x).classList.add('used');msg.textContent='✓ Teil in der Mühle.'});
+function answer(){
+ let e=selected.has('endosperm'),g=selected.has('germ'),o=selected.has('outer'),i=selected.has('inner');
+ if(e&&g&&o&&i)return ['Vollkornmehl','Alle Teile des Korns sind enthalten.'];
+ if(e&&(o||(i&&g)))return ['Ruchmehl','Dieses Mehl enthält den Mehlkörper und Teile der äusseren Schichten.'];
+ if(e&&i&&!o&&!g)return ['Halbweissmehl','Dieses Mehl ist nahezu schalenfrei.'];
+ if(e&&!g&&!o&&!i)return ['Weissmehl','Es wird nur der Mehlkörper verwendet.'];
+ return ['Noch keine eindeutige Mehlsorte','Für diese Mehlsorte fehlen noch passende Teile.'];
+}
+btn.onclick=()=>{if(!selected.has('endosperm')){msg.textContent='Der Mehlkörper fehlt – füge ihn hinzu.';return}btn.disabled=true;msg.textContent='⚙️ Die Mühle mahlt ...';wheel.classList.add('spinning');setTimeout(()=>{let a=answer();name.textContent=a[0];desc.textContent=a[1];result.style.display='block';msg.textContent='Das Mahlen ist fertig! 🎉';btn.disabled=false},1100)};
+document.getElementById('reset').onclick=()=>location.reload();
+</script>
+</body></html>
